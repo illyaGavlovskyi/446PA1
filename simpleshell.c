@@ -21,13 +21,13 @@ void executeCommand();
 
 int main(){
     char cwd[MAX];
-    //getcwd(cwd,MAX);
-    //printf("igavlovskyi:%s$",cwd);
+    getcwd(cwd,MAX);
+    printf("igavlovskyi:%s$",cwd);
 
     char input[MAX];
     char splitCommands[MAX][MAX];
 
-    while(true){
+    while(1){
         printf("works");
     }
 
