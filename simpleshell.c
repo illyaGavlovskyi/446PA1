@@ -15,29 +15,42 @@
 
 #define MAX 100
 
-void parseInput();
+int parseInput(char * input, char splitWords[][500], int maxWords);
 void changeDirectories();
 void executeCommand();
 
 int main(){
-    char cwd[MAX];
-    getcwd(cwd,MAX);
-    printf("igavlovskyi:%s$",cwd);
-
     char input[MAX];
-    char splitCommands[MAX][MAX];
+    char splitWords[MAX][500];
 
     while(1){
-        printf("works");
+        char cwd[MAX];
+        getcwd(cwd,MAX);
+        printf("igavlovskyi:%s$",cwd);
+
+        fgets(input, sizeof(input), stdin)
+
+        if(){
+            
+        }
     }
 
 
     return 0;
 }
 
-void parseInput(){
-
-} 
+int parseInput(char * input, char splitWords[][500], int maxWords);{
+    char *token;
+    token = strtok(input, " ");
+    int num = 0;
+    while(num < maxWords) {
+        printf( " %s\n", token);
+        strcpy (splitWords[num], token);
+        token = strtok(NULL, " ");
+        num++;
+   }
+   return num; 
+}
 
 void changeDirectories(){
 
