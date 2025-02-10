@@ -28,10 +28,17 @@ int main(){
         getcwd(cwd,MAX);
         printf("igavlovskyi:%s$",cwd);
 
-        fgets(input, sizeof(input), stdin)
+        fgets(input, sizeof(input), stdin);
+        int numWords = parseInput(input, splitWords, MAX);
+        for(int i = 0; i < sizeof(splitWords[i]); i++){
+            printf( "%s%d\n", splitWords[i], i);
 
-        if(){
-            
+        }
+        if(strcmp(splitWords[0],"cd")==0){
+
+        }
+        else if(strcmp(splitWords[0],"exit")==0){
+            break;
         }
     }
 
@@ -39,14 +46,15 @@ int main(){
     return 0;
 }
 
-int parseInput(char * input, char splitWords[][500], int maxWords);{
+int parseInput(char * input, char splitWords[][500], int maxWords){
     char *token;
     token = strtok(input, " ");
     int num = 0;
-    while(num < maxWords) {
-        printf( " %s\n", token);
+    while(token != NULL) {
+        printf( "%s\n", token); // TEST
+
         strcpy (splitWords[num], token);
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " \n");
         num++;
    }
    return num; 
