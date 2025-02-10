@@ -2,7 +2,6 @@
 //CS 446
 //PA1
 
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -17,28 +16,48 @@
 
 int parseInput(char * input, char splitWords[][500], int maxWords);
 void changeDirectories();
-void executeCommand();
+int executeCommand(char * const* enteredCommand, const char* infile, const char* outfile);
 
-int main(){
+int main()
+{
     char input[MAX];
     char splitWords[MAX][500];
 
-    while(1){
+    while(1)
+    {
         char cwd[MAX];
         getcwd(cwd,MAX);
         printf("igavlovskyi:%s$",cwd);
 
         fgets(input, sizeof(input), stdin);
         int numWords = parseInput(input, splitWords, MAX);
-        for(int i = 0; i < sizeof(splitWords[i]); i++){
-            printf( "%s%d\n", splitWords[i], i);
+        // for(int i = 0; i < sizeof(splitWords[i]); i++)
+        // {
+        //     printf( "%s%d\n", splitWords[i], i);
 
+    //    }
+        if(strcmp(splitWords[0],"cd") == 0)
+        {
+            changeDirectories();   
         }
-        if(strcmp(splitWords[0],"cd")==0){
-
-        }
-        else if(strcmp(splitWords[0],"exit")==0){
+        else if(strcmp(splitWords[0],"exit") == 0)
+        {
             break;
+        }
+        else
+        {
+            if(strcmp(splitWords[], "<") == 0)
+            {
+
+            }
+            else if(splitWords[], ">") == 0)
+            {
+
+            }
+            else
+            {
+                executeCommand();
+            }
         }
     }
 
@@ -46,7 +65,8 @@ int main(){
     return 0;
 }
 
-int parseInput(char * input, char splitWords[][500], int maxWords){
+int parseInput(char * input, char splitWords[][500], int maxWords)
+{
     char *token;
     token = strtok(input, " ");
     int num = 0;
@@ -60,10 +80,12 @@ int parseInput(char * input, char splitWords[][500], int maxWords){
    return num; 
 }
 
-void changeDirectories(){
+void changeDirectories()
+{
 
 }
 
-void executeCommand(){
+int executeCommand(char * const* enteredCommand, const char* infile, const char* outfile)
+{
     
 }
