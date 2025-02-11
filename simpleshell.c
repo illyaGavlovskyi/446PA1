@@ -15,7 +15,7 @@
 #define MAX 100
 
 int parseInput(char * input, char splitWords[][500], int maxWords);
-void changeDirectories();
+void changeDirectories(const char *path);
 int executeCommand(char * const* enteredCommand, const char* infile, const char* outfile);
 
 int main()
@@ -34,7 +34,7 @@ int main()
         
         if(strcmp(splitWords[0],"cd") == 0)
         {
-            changeDirectories();   
+            changeDirectories(splitWords[1]);   
         }
         else if(strcmp(splitWords[0],"exit") == 0)
         {
@@ -42,22 +42,23 @@ int main()
         }
         else
         {
-            if(strcmp(splitWords[0], "<") == 0)
+            for()
             {
+                if(strcmp(splitWords[0], "<") == 0)
+                {
 
-            }
-            else if(strcmp(splitWords[0], ">") == 0)
-            {
+                }
+                else if(strcmp(splitWords[0], ">") == 0)
+                {
 
-            }
-            else
-            {
-                // executeCommand();
+                }
+                else
+                {
+                    // executeCommand();
+                }
             }
         }
     }
-
-
     return 0;
 }
 
@@ -76,9 +77,13 @@ int parseInput(char * input, char splitWords[][500], int maxWords)
    return num; 
 }
 
-void changeDirectories()
+void changeDirectories(const char *path)
 {
-
+    int check = chdir(path);
+    if(check == -1)
+    {
+        printf("chdir Failed: %s\n", strerror(errno));
+    }
 }
 
 int executeCommand(char * const* enteredCommand, const char* infile, const char* outfile)
