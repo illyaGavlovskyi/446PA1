@@ -31,11 +31,7 @@ int main()
 
         fgets(input, sizeof(input), stdin);
         int numWords = parseInput(input, splitWords, MAX);
-        // for(int i = 0; i < sizeof(splitWords[i]); i++)
-        // {
-        //     printf( "%s%d\n", splitWords[i], i);
-
-    //    }
+        
         if(strcmp(splitWords[0],"cd") == 0)
         {
             changeDirectories();   
@@ -46,17 +42,17 @@ int main()
         }
         else
         {
-            if(strcmp(splitWords[], "<") == 0)
+            if(strcmp(splitWords[0], "<") == 0)
             {
 
             }
-            else if(splitWords[], ">") == 0)
+            else if(strcmp(splitWords[0], ">") == 0)
             {
 
             }
             else
             {
-                executeCommand();
+                // executeCommand();
             }
         }
     }
