@@ -41,21 +41,30 @@ int main()
             break;
         }
         else
-        {
-            for()
+        {   
+            char *infile = NULL;
+            char *outfile = NULL;
+            
+            int tempCount = 0;
+            char *temp[numWords + 1];
+
+            for(int i = 0; i < numWords; i++)
             {
-                if(strcmp(splitWords[0], "<") == 0)
+                if(strcmp(splitWords[i], "<") == 0)
                 {
-
+                    infile = splitWords[i + 1];
                 }
-                else if(strcmp(splitWords[0], ">") == 0)
+                else if(strcmp(splitWords[i], ">") == 0)
                 {
-
+                    outfile = splitWords[i + 1];
                 }
                 else
                 {
-                    // executeCommand();
+                    temp[tempCount] = splitWords[i];
+                    tempCount++;
                 }
+                temp[tempCount] = NULL;
+                executeCommand(temp, infile, outfile);
             }
         }
     }
@@ -88,5 +97,41 @@ void changeDirectories(const char *path)
 
 int executeCommand(char * const* enteredCommand, const char* infile, const char* outfile)
 {
-    
+    pid_t pid = fork();
+    if(pid == -1)
+    {
+        printf("fork Failed: %s\n", strerror(errno));
+        return 1;
+    }
+    else if(pid == 0)
+    {
+        if(infile != NULL)
+        {
+            int fd = open(infile, O_RDONLY, 0666);
+            dup2(fd, STDIN_FILENO);
+            close(fd);
+        }
+        else if(outfile != NULL)
+        {
+            int fd = open(outfile, O_WRONLY|O_CREAT|O_TRUNC, 0666);
+            dup2(fd, STDOUT_FILENO);
+            close(fd);
+        }
+        
+        if(execvp(enteredCommand[0], enteredCommand) == -1)
+        {
+            printf("execvp Failed: %s\n", strerror(errno));
+            _exit(1);
+        }
+
+    }
+    else
+    {
+        int status;
+        wait(&status);
+        if(status != 0)
+        {
+            printf("Child finished with error status: %d", status);
+        }
+    }
 }
