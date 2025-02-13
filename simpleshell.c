@@ -20,24 +20,24 @@ int executeCommand(char * const* enteredCommand, const char* infile, const char*
 
 int main()
 {
-    char input[MAX];
-    char splitWords[MAX][500];
-
     while(1)
     {
+        char input[MAX];
+        char splitWords[MAX][500];
+
         char cwd[MAX];
         getcwd(cwd,MAX);
-        printf("igavlovskyi:%s$",cwd);
+        printf("igavlovskyi: %s$",cwd);
 
         fgets(input, sizeof(input), stdin);
         int numWords = parseInput(input, splitWords, MAX);
-        
         if(strcmp(splitWords[0],"cd") == 0)
         {
             changeDirectories(splitWords[1]);   
         }
         else if(strcmp(splitWords[0],"exit") == 0)
         {
+            return 0;
             break;
         }
         else
@@ -74,10 +74,10 @@ int main()
 int parseInput(char * input, char splitWords[][500], int maxWords)
 {
     char *token;
-    token = strtok(input, " ");
+    token = strtok(input, " \n");
     int num = 0;
     while(token != NULL) {
-        printf( "%s\n", token); // TEST
+        // printf( "%s\n", token); // TEST
 
         strcpy (splitWords[num], token);
         token = strtok(NULL, " \n");
@@ -131,7 +131,8 @@ int executeCommand(char * const* enteredCommand, const char* infile, const char*
         wait(&status);
         if(status != 0)
         {
-            printf("Child finished with error status: %d", status);
+            printf("Child finished with error status: %d\n", status);
         }
     }
+    return 0;
 }
